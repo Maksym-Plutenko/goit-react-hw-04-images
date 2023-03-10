@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { ImageGalleryItem } from './ImageGalleryItem/ImageGalleryItem';
 import css from './ImageGallery.module.css';
 
-class ImageGallery extends Component {
-  render() {
+const ImageGallery = ({pictures, onClick}) => {
+  // render() {
     return (
       <ul className={css.gallery}>
-        {this.props.pictures.map(img => (
+        {pictures.map(img => (
           <ImageGalleryItem
             key={img.id}
             id={img.id}
             smallpic={img.webformatURL}
             largepic={img.largeImageURL}
-            onClick={this.props.onClick}
+            onClick={onClick}
           />
         ))}
       </ul>
     );
-  }
+  // }
 }
 
 ImageGallery.propTypes = {
@@ -28,9 +28,9 @@ ImageGallery.propTypes = {
       id: PropTypes.number.isRequired,
       webformatURL: PropTypes.string.isRequired,
       largeImageURL: PropTypes.string.isRequired,
-      onClick: PropTypes.func,
     })
   ),
+  onClick: PropTypes.func.isRequired,
 };
 
 export { ImageGallery };

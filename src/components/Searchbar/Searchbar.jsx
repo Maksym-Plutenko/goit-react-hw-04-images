@@ -1,33 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 import css from './Searchbar.module.css';
 
-class Searchbar extends Component {
-  state = {
-    request: '',
+const Searchbar = ({onSubmit}) => {
+  // state = {
+  //   request: '',
+  // };
+
+  const [request, setRequest] = useState('');
+
+  const changeHandler = evt => {
+    // this.setState({
+    //   request: evt.currentTarget.value,
+    // });
+    setRequest(evt.currentTarget.value);
   };
 
-  changeHandler = evt => {
-    this.setState({
-      request: evt.currentTarget.value,
-    });
-  };
-
-  submitHandler = evt => {
+  const submitHandler = evt => {
     evt.preventDefault();
-    this.props.onSubmit(this.state.request);
-    this.setState({
-      request: '',
-    });
+    onSubmit(request);
+    // this.setState({
+    //   request: '',
+    // });
+    setRequest('');
   };
 
-  render() {
+  // render() {
     return (
       <header className={css.searchbar}>
-        <form className={css.form} onSubmit={this.submitHandler}>
+        <form className={css.form} onSubmit={submitHandler}>
           <button type="submit" className={css.button}>
             <span className={css.buttonLabel}> Search </span>
             <HiMagnifyingGlass className={css.ico} />
@@ -39,13 +43,13 @@ class Searchbar extends Component {
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            value={this.state.request}
-            onChange={this.changeHandler}
+            value={request}
+            onChange={changeHandler}
           />
         </form>
       </header>
     );
-  }
+  // }
 }
 
 Searchbar.propTypes = {

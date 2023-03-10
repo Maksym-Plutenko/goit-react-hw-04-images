@@ -1,39 +1,41 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import css from './Modal.module.css';
 
-class Modal extends Component {
-  clickHandler = evt => {
+const Modal = ({ picture, close }) => {
+
+
+  useEffect(() => {
+    const escHandler = evt => {
+      if (evt.key === 'Escape') {
+        close();
+      }
+    };
+
+    document.addEventListener('keydown', escHandler);
+    // console.log('listener added');
+
+    return () => {
+      document.removeEventListener('keydown', escHandler);
+      // console.log('listener removed');
+    };
+  }, [close]);
+
+  const clickHandler = evt => {
     if (evt.target === evt.currentTarget) {
-      this.props.close();
+      close();
     }
   };
 
-  componentDidMount() {
-    document.addEventListener('keydown', this.escHandler);
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.escHandler);
-  }
-
-  escHandler = evt => {
-    if (evt.key === 'Escape') {
-      this.props.close();
-    }
-  };
-
-  render() {
-    return (
-      <div className={css.overlay} onClick={this.clickHandler}>
-        <div className={css.modal}>
-          <img src={this.props.picture} alt="" />
-        </div>
+  return (
+    <div className={css.overlay} onClick={clickHandler}>
+      <div className={css.modal}>
+        <img src={picture} alt="" />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Modal.propTypes = {
   picture: PropTypes.string.isRequired,

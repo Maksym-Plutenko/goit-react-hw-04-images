@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import css from './ImageGalleryItem.module.css';
 
-class ImageGalleryItem extends Component {
-  clickHandler = evt => {
-    this.props.onClick(this.props.largepic);
+const ImageGalleryItem = ({id, smallpic, largepic, onClick}) => {
+  const clickHandler = evt => {
+    onClick(largepic);
   };
 
-  render() {
+  // render() {
     return (
       <li className={css.galleryItem}>
         <img
-          src={this.props.smallpic}
-          alt={'picture #' + this.props.id}
+          src={smallpic}
+          alt={'picture #' + id}
           className={css.galleryImg}
-          onClick={this.clickHandler}
+          onClick={clickHandler}
         />
       </li>
     );
-  }
+  // }
 }
 
 ImageGalleryItem.propTypes = {
