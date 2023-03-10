@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import css from './Modal.module.css';
 
 const Modal = ({ picture, close }) => {
-
-
   useEffect(() => {
     const escHandler = evt => {
       if (evt.key === 'Escape') {
@@ -14,11 +12,9 @@ const Modal = ({ picture, close }) => {
     };
 
     document.addEventListener('keydown', escHandler);
-    // console.log('listener added');
 
     return () => {
       document.removeEventListener('keydown', escHandler);
-      // console.log('listener removed');
     };
   }, [close]);
 

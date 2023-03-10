@@ -1,26 +1,23 @@
-// import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import css from './ImageGalleryItem.module.css';
 
-const ImageGalleryItem = ({id, smallpic, largepic, onClick}) => {
+const ImageGalleryItem = ({ id, smallpic, largepic, onClick }) => {
   const clickHandler = evt => {
     onClick(largepic);
   };
 
-  // render() {
-    return (
-      <li className={css.galleryItem}>
-        <img
-          src={smallpic}
-          alt={'picture #' + id}
-          className={css.galleryImg}
-          onClick={clickHandler}
-        />
-      </li>
-    );
-  // }
-}
+  return (
+    <li className={css.galleryItem}>
+      <img
+        src={smallpic}
+        alt={'picture #' + id}
+        className={css.galleryImg}
+        onClick={clickHandler}
+      />
+    </li>
+  );
+};
 
 ImageGalleryItem.propTypes = {
   id: PropTypes.number.isRequired,
